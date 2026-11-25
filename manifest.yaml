@@ -1,0 +1,293 @@
+# ============================================================
+# identity — сервис аутентификации. Фокус: AUTH (пароли, токены, ключи,
+# OAuth, заголовки), секреты в коде, admin-зона, Spring Security в импортах.
+# Уязвимости: хэш пароля и MFA-секрет в ответе админки, ключи API в
+# открытом виде, захардкоженные секреты.
+# ============================================================
+app: identity
+title: "SDD testbed — сервис аутентификации"
+package: ru.testbed.identity
+port: 8083
+dependencies:
+  - org.springframework.security:spring-security-core
+  - io.jsonwebtoken:jjwt-api:0.12.6
+
+dtos:
+  LoginRequest:
+    - [username, String, PII_INDIRECT accept=AUTH]
+    - [password, String, AUTH]
+    - [otp, String, AUTH]
+    - [captchaToken, String, GRAY, "токен капчи: короткоживущий, спорно"]
+    - [rememberMe, Boolean]
+
+  TokenResponse:
+    - [accessToken, String, AUTH]
+    - [refreshToken, String, AUTH]
+    - [idToken, String, AUTH]
+    - [tokenType, String, NONE trap, "Bearer — тип, а не токен"]
+    - [expiresIn, Long]
+    - [scope, String]
+
+  RegisterRequest:
+    - [email, String, PII_DIRECT]
+    - [password, String, AUTH]
+    - [passwordConfirm, String, AUTH hard, "password_confirm"]
+    - [phone, String, PII_DIRECT]
+    - [inviteCode, String, GRAY]
+    - [acceptTerms, Boolean]
+
+  PasswordResetRequest:
+    - [resetToken, String, AUTH]
+    - [newPassword, String, AUTH hard, "new_password — правило ждёт ровно password"]
+
+  MfaVerifyRequest:
+    - [mfaCode, String, AUTH]
+    - [deviceId, String, PII_INDIRECT]
+    - [trustDevice, Boolean]
+
+  # Имя класса User в пакете model — для ctx.import.pii_model
+  User:
+    package: model
+    fields:
+      - [id, Long]
+      - [username, String, PII_INDIRECT accept=AUTH]
+      - [email, String, PII_DIRECT]
+      - [displayName, String, PII_DIRECT]
+      - [roles, List<String>]
+      - [passwordHash, String, AUTH hard, "хэш пароля в ответе — уязвимость; password_hash не совпадает с шаблоном"]
+      - [mfaSecret, String, AUTH hard, "TOTP-секрет"]
+      - [lastLoginIp, String, PII_INDIRECT hard, "last_login_ip"]
+      - [lastLoginAt, Instant]
+      - [locked, Boolean]
+
+  ApiKeyDto:
+    - [id, Long]
+    - [name, String]
+    - [apiKey, String, AUTH]
+    - [prefix, String]
+    - [createdBy, String, PII_INDIRECT]
+    - [expiresAt, Instant]
+
+  ApiKeyCreateRequest:
+    - [name, String]
+    - [scopes, List<String>]
+
+  RoleDto:
+    - [name, String]
+    - [permissions, List<String>]
+
+  SessionDto:
+    - [sessionId, String, AUTH accept=PII_INDIRECT, "идентификатор сессии = учётные данные"]
+    - [userAgent, String, PII_INDIRECT]
+    - [ip, String, PII_INDIRECT]
+    - [location, String, PII_INDIRECT]
+    - [createdAt, Instant]
+
+  TokenizeRequest:
+    - [text, String, DYNAMIC, "произвольный текст на токенизацию"]
+    - [tokenizer, String, NONE trap, "название токенизатора"]
+    - [maxTokens, Integer, NONE trap]
+
+  TokenizeResponse:
+    - [tokens, List<String>, GRAY, "токены текста: повторяют входной текст"]
+    - [tokenCount, Integer, NONE trap]
+
+controllers:
+  - class: AuthController
+    base: /api/v1/auth
+    extra_imports:
+      - org.springframework.security.core.context.SecurityContextHolder
+    endpoints:
+      - op: login
+        http: POST
+        path: /login
+        body: [credentials, LoginRequest]
+        returns: TokenResponse
+        expect: [AUTH]
+      - op: register
+        http: POST
+        path: /register
+        body: [request, RegisterRequest]
+        returns: User
+        expect: [AUTH, PII_DIRECT]
+      - op: refresh
+        http: POST
+        path: /refresh
+        params: [[Authorization, header, String, AUTH]]
+        returns: TokenResponse
+        expect: [AUTH]
+      - op: resetPassword
+        http: POST
+        path: /password/reset
+        body: [request, PasswordResetRequest]
+        expect: [AUTH]
+      - op: verifyMfa
+        http: POST
+        path: /mfa/verify
+        body: [request, MfaVerifyRequest]
+        returns: TokenResponse
+        expect: [AUTH]
+      - op: logout
+        http: POST
+        path: /logout
+        params:
+          - [Authorization, header, String, AUTH]
+          - [Cookie, header, String, AUTH]
+        code: ["SecurityContextHolder.clearContext();"]
+        expect: [AUTH]
+
+  - class: OAuthController
+    base: /oauth2
+    endpoints:
+      - op: authorize
+        http: GET
+        path: /authorize
+        params:
+          - [response_type, query, String]
+          - [client_id, query, String, GRAY]
+          - [redirect_uri, query, String, GRAY, "не секрет, но правило OAuth его ловит"]
+          - [state, query, String, GRAY]
+          - [code_challenge, query, String, AUTH]
+          - [nonce, query, String, AUTH]
+        expect: [AUTH]
+      - op: token
+        http: POST
+        path: /token
+        params:
+          - [grant_type, query, String, GRAY, "тип гранта: не секрет"]
+          - [code, query, String, AUTH hard, "authorization code; имя code само ничего не говорит"]
+          - [redirect_uri, query, String, GRAY]
+          - [client_id, query, String, GRAY]
+          - [client_secret, query, String, AUTH]
+          - [code_verifier, query, String, AUTH]
+          - [refresh_token, query, String, AUTH]
+        returns: TokenResponse
+        expect: [AUTH]
+
+  - class: UserAdminController
+    base: /admin/users
+    extra_imports:
+      - org.springframework.security.core.Authentication
+    endpoints:
+      - op: listUsers
+        http: GET
+        params:
+          - [email, query, String, PII_DIRECT]
+          - [page, query, Integer]
+        returns: List<User>
+        expect: [AUTH, PII_DIRECT]
+        admin: true
+      - op: getUser
+        http: GET
+        path: /{userId}
+        params: [[userId, path, Long, PII_INDIRECT]]
+        returns: User
+        expect: [AUTH, PII_DIRECT]
+        admin: true
+      - op: impersonate
+        http: POST
+        path: /{userId}/impersonate
+        params: [[userId, path, Long, PII_INDIRECT]]
+        returns: TokenResponse
+        expect: [AUTH]
+        allow: [PII_DIRECT]
+        admin: true
+      - op: dropSessions
+        http: DELETE
+        path: /{userId}/sessions
+        params: [[userId, path, Long, PII_INDIRECT]]
+        expect: [AUTH]
+        allow: [PII_DIRECT]
+        admin: true
+
+  - class: RoleController
+    base: /api/v1/roles
+    endpoints:
+      - op: listRoles
+        http: GET
+        returns: List<RoleDto>
+        expect: [AUTH]
+
+  - class: ApiKeyController
+    base: /api/v1/api-keys
+    doc: "Выдача API-ключей. Путь api-keys правила не знают."
+    endpoints:
+      - op: createApiKey
+        http: POST
+        body: [request, ApiKeyCreateRequest]
+        returns: ApiKeyDto
+        expect: [AUTH]
+      - op: listApiKeys
+        http: GET
+        params: [[X-Api-Key, header, String, AUTH]]
+        returns: List<ApiKeyDto>
+        expect: [AUTH]
+
+  - class: MySessionsController
+    base: /api/v1/me/sessions
+    endpoints:
+      - op: listMySessions
+        http: GET
+        returns: List<SessionDto>
+        expect: [AUTH, PII_INDIRECT]
+
+  - class: ConfigController
+    base: /config
+    endpoints:
+      - op: keycloakConfig
+        http: GET
+        path: /keycloak.json
+        returns: "Map<String, Object>"
+        returns_label: ["AUTH", "конфиг Keycloak: realm, client secret"]
+        expect: [AUTH]
+      - op: uiTheme
+        http: GET
+        path: /ui-theme.json
+        returns: "Map<String, Object>"
+        returns_label: ["NONE trap", "цвета и шрифты интерфейса"]
+        expect: []
+        why: "ловушка: .json в пути — не значит секреты"
+
+  - class: OpsController
+    base: /actuator
+    endpoints:
+      - op: env
+        http: GET
+        path: /env
+        returns: "Map<String, Object>"
+        returns_label: ["AUTH hard", "переменные окружения с паролями"]
+        expect: [AUTH]
+        admin: true
+
+  - class: TokenizerController
+    base: /api/v1/nlp
+    doc: "Ловушка: токенизация текста (NLP), а не токены доступа."
+    endpoints:
+      - op: tokenize
+        http: POST
+        path: /tokenize
+        body: [request, TokenizeRequest]
+        returns: TokenizeResponse
+        expect: []
+        allow: [DYNAMIC]
+
+constants:
+  - class: SecurityConstants
+    items:
+      - [JWT_SIGNING_SECRET, "c2VjcmV0LWtleS1mb3ItdGVzdGJlZC1vbmx5LTAwMDE=", AUTH hard, "секрет подписи JWT; в значении нет слова secret — видно только по имени константы"]
+      - [JWT_SECRET_PROPERTY, "jwt.secret=Zx81kQ0pLm2NvB7rT4yWs9Ue", AUTH]
+      - [DEMO_ACCESS_TOKEN, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c", AUTH, "пример JWT с jwt.io"]
+      - [TEST_BEARER, "Bearer dummy", NONE trap, "заглушка из тестов"]
+      - [SERVICE_BEARER, "Bearer 9f8e7d6c5b4a39281706f5e4d3c2b1a0", AUTH]
+      - [AWS_ACCESS_KEY_ID, "AKIAIOSFODNN7EXAMPLE", AUTH, "пример ключа из документации AWS"]
+      - [GITHUB_TOKEN, "ghp_TESTBEDfakeTokenNotReal0000000000000000", AUTH, "формат GitHub PAT, значение вымышленное"]
+      - [SLACK_BOT_TOKEN, "xoxb-000000000000-testbedFAKEtoken", AUTH, "формат Slack, значение вымышленное"]
+      - [MAPS_API_KEY, "AIzaTESTBEDfakeKeyNotReal00000000000000", AUTH, "формат Google API key, значение вымышленное"]
+      - [PRIVATE_KEY_PEM, "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAtestbedFAKEkeyMaterialNotReal\n-----END RSA PRIVATE KEY-----", AUTH]
+      - [PUBLIC_KEY_PEM, "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AtestbedFAKE\n-----END PUBLIC KEY-----", NONE trap, "публичный ключ"]
+      - [PASSWORD_MASK, "password=***", NONE trap, "маска в логах"]
+      - [TOKEN_NULL, "token = null", NONE trap]
+      - [ADMIN_DEFAULT_PASSWORD, "admin123", AUTH hard, "пароль по умолчанию: короткий, без присвоения"]
+      - [LDAP_URL, "ldap://cn=svc,dc=corp:password=Qw3rTy!Secr3tPass99@ldap.corp.example", AUTH hard, "пароль со спецсимволом рвёт шаблон secret_assignment"]
+      - [OAUTH_CLIENT_SECRET, "client_secret: 'a7F3k9Q2m8X1p5Z6r4T0w2Y9'", AUTH]
+      - [REALM_URL, "https://sso.corp.example/realms/testbed"]

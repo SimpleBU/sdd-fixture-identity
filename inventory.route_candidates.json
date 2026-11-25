@@ -1,0 +1,1683 @@
+{
+  "version": "1.0.0",
+  "tool": {
+    "name": "sdd-testbed-generator",
+    "version": "1.0",
+    "note": "эталонная инвентаризация: что должен выдать анализатор на этом коде"
+  },
+  "route_candidates": {
+    "sha256:6678474df9f04a0244502c1d72c4bf8290f57a34a9fffbb3f100d7e6d77ffa96": {
+      "candidate_id": "sha256:6678474df9f04a0244502c1d72c4bf8290f57a34a9fffbb3f100d7e6d77ffa96",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/AuthController.java",
+      "location": {
+        "start": {
+          "row": 21,
+          "column": 5
+        },
+        "end": {
+          "row": 24,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.AuthController",
+        "name": "login"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.context.SecurityContextHolder",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.LoginRequest",
+          "ru.testbed.identity.dto.MfaVerifyRequest",
+          "ru.testbed.identity.dto.PasswordResetRequest",
+          "ru.testbed.identity.dto.RegisterRequest",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.AuthController"
+      },
+      "resolved": {
+        "sha256:129b537143770cfd6e1d00b0e88e77ab4464dea53f5888156941e4a935c2d1ca": {
+          "operation_id": "sha256:129b537143770cfd6e1d00b0e88e77ab4464dea53f5888156941e4a935c2d1ca",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/auth/login",
+            "normalized": "/api/v1/auth/login"
+          },
+          "confidence": "high",
+          "parameters": [],
+          "request_body": {
+            "request_body_id": "sha256:3239e78d26973efd2effa3f09a6a4006f62909cf3c1fda6146b50514f074b9b4",
+            "mode": "single",
+            "parts": [
+              {
+                "name": "credentials",
+                "value_type": {
+                  "kind": "object",
+                  "title": "LoginRequest",
+                  "properties": [
+                    {
+                      "name": "username",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "password",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "otp",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "captchaToken",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "rememberMe",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "boolean"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sha256:8113a55b826109acc48c57357f5c4cfd6ad405e741b6c91ad9139a5998da527c": {
+      "candidate_id": "sha256:8113a55b826109acc48c57357f5c4cfd6ad405e741b6c91ad9139a5998da527c",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/AuthController.java",
+      "location": {
+        "start": {
+          "row": 26,
+          "column": 5
+        },
+        "end": {
+          "row": 29,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.AuthController",
+        "name": "register"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.context.SecurityContextHolder",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.LoginRequest",
+          "ru.testbed.identity.dto.MfaVerifyRequest",
+          "ru.testbed.identity.dto.PasswordResetRequest",
+          "ru.testbed.identity.dto.RegisterRequest",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.AuthController"
+      },
+      "resolved": {
+        "sha256:e79b6aede2b4130b9e48f4f1f64fe27ca60c9fe63cc8775d08a52a2dad452ccb": {
+          "operation_id": "sha256:e79b6aede2b4130b9e48f4f1f64fe27ca60c9fe63cc8775d08a52a2dad452ccb",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/auth/register",
+            "normalized": "/api/v1/auth/register"
+          },
+          "confidence": "high",
+          "parameters": [],
+          "request_body": {
+            "request_body_id": "sha256:a332c0673b9cb77c5e0286f5ad54b948f32ecf1cd6755b0fc2526a3d9068877c",
+            "mode": "single",
+            "parts": [
+              {
+                "name": "request",
+                "value_type": {
+                  "kind": "object",
+                  "title": "RegisterRequest",
+                  "properties": [
+                    {
+                      "name": "email",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "password",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "passwordConfirm",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "phone",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "inviteCode",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "acceptTerms",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "boolean"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sha256:8d5a7e3cf0a3529a87b837a1031ca26ea422dc0bc8a89e2918172f06adbd46e8": {
+      "candidate_id": "sha256:8d5a7e3cf0a3529a87b837a1031ca26ea422dc0bc8a89e2918172f06adbd46e8",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/AuthController.java",
+      "location": {
+        "start": {
+          "row": 31,
+          "column": 5
+        },
+        "end": {
+          "row": 34,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.AuthController",
+        "name": "refresh"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.context.SecurityContextHolder",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.LoginRequest",
+          "ru.testbed.identity.dto.MfaVerifyRequest",
+          "ru.testbed.identity.dto.PasswordResetRequest",
+          "ru.testbed.identity.dto.RegisterRequest",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.AuthController"
+      },
+      "resolved": {
+        "sha256:783d87ddebdbbdcd7caa127b875ae337d42f961a943d6840714fb5294544f4ab": {
+          "operation_id": "sha256:783d87ddebdbbdcd7caa127b875ae337d42f961a943d6840714fb5294544f4ab",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/auth/refresh",
+            "normalized": "/api/v1/auth/refresh"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:21a3baf46e6a027a922307a3aca6f464822cd602f7792d3e62f9a900ca6a3789",
+              "name": "Authorization",
+              "in": "header",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            }
+          ]
+        }
+      }
+    },
+    "sha256:79ce86dc61fdfb39072fcfd048e6cf7bb7f8bb0c326bac6e73e95959ca387c8f": {
+      "candidate_id": "sha256:79ce86dc61fdfb39072fcfd048e6cf7bb7f8bb0c326bac6e73e95959ca387c8f",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/AuthController.java",
+      "location": {
+        "start": {
+          "row": 36,
+          "column": 5
+        },
+        "end": {
+          "row": 39,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.AuthController",
+        "name": "resetPassword"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.context.SecurityContextHolder",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.LoginRequest",
+          "ru.testbed.identity.dto.MfaVerifyRequest",
+          "ru.testbed.identity.dto.PasswordResetRequest",
+          "ru.testbed.identity.dto.RegisterRequest",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.AuthController"
+      },
+      "resolved": {
+        "sha256:e72e0de57635bcdfa5a8a72d88c012a5d7c3e9d48f4dfab3a1decb62f9e80897": {
+          "operation_id": "sha256:e72e0de57635bcdfa5a8a72d88c012a5d7c3e9d48f4dfab3a1decb62f9e80897",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/auth/password/reset",
+            "normalized": "/api/v1/auth/password/reset"
+          },
+          "confidence": "high",
+          "parameters": [],
+          "request_body": {
+            "request_body_id": "sha256:2e1fd6d0359c9e2cb86525831c2d19dab7e0383566b4e10fee98aa6ba5b3840d",
+            "mode": "single",
+            "parts": [
+              {
+                "name": "request",
+                "value_type": {
+                  "kind": "object",
+                  "title": "PasswordResetRequest",
+                  "properties": [
+                    {
+                      "name": "resetToken",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "newPassword",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sha256:31aab5ab8ec722fd499e14032570ae3512f998b9fa6990f7586c227b1199c678": {
+      "candidate_id": "sha256:31aab5ab8ec722fd499e14032570ae3512f998b9fa6990f7586c227b1199c678",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/AuthController.java",
+      "location": {
+        "start": {
+          "row": 41,
+          "column": 5
+        },
+        "end": {
+          "row": 44,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.AuthController",
+        "name": "verifyMfa"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.context.SecurityContextHolder",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.LoginRequest",
+          "ru.testbed.identity.dto.MfaVerifyRequest",
+          "ru.testbed.identity.dto.PasswordResetRequest",
+          "ru.testbed.identity.dto.RegisterRequest",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.AuthController"
+      },
+      "resolved": {
+        "sha256:68c8033e6d0710733375654de59228c4e13e8f8d6079964edd55130f4d79cc18": {
+          "operation_id": "sha256:68c8033e6d0710733375654de59228c4e13e8f8d6079964edd55130f4d79cc18",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/auth/mfa/verify",
+            "normalized": "/api/v1/auth/mfa/verify"
+          },
+          "confidence": "high",
+          "parameters": [],
+          "request_body": {
+            "request_body_id": "sha256:66970bd6b41aff048ccd36b8464016b672298d34c33c440726e3dce64f34106b",
+            "mode": "single",
+            "parts": [
+              {
+                "name": "request",
+                "value_type": {
+                  "kind": "object",
+                  "title": "MfaVerifyRequest",
+                  "properties": [
+                    {
+                      "name": "mfaCode",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "deviceId",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "trustDevice",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "boolean"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sha256:290a83d8f02925170dddc02cd5b17ffaaf055fb3e9af11a1f4f4a830455c1c54": {
+      "candidate_id": "sha256:290a83d8f02925170dddc02cd5b17ffaaf055fb3e9af11a1f4f4a830455c1c54",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/AuthController.java",
+      "location": {
+        "start": {
+          "row": 46,
+          "column": 5
+        },
+        "end": {
+          "row": 49,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.AuthController",
+        "name": "logout"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.context.SecurityContextHolder",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.LoginRequest",
+          "ru.testbed.identity.dto.MfaVerifyRequest",
+          "ru.testbed.identity.dto.PasswordResetRequest",
+          "ru.testbed.identity.dto.RegisterRequest",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.AuthController"
+      },
+      "resolved": {
+        "sha256:2b89a6ea0faf81871e39c777aaa47784c50f5fc78294e48e49f49567e3e60ce9": {
+          "operation_id": "sha256:2b89a6ea0faf81871e39c777aaa47784c50f5fc78294e48e49f49567e3e60ce9",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/auth/logout",
+            "normalized": "/api/v1/auth/logout"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:a330cd1665d3ae457107ab8be1879edce75bafc8976ab3e96e1fdd706933d036",
+              "name": "Authorization",
+              "in": "header",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:a7786069a1b2d337a1f22067d305287388e81820500d2bdeff96d4edae3704af",
+              "name": "Cookie",
+              "in": "header",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            }
+          ]
+        }
+      }
+    },
+    "sha256:773a0efe27817987eb26021673c4de268fd6a75374dd500e9ac50d22a92a4126": {
+      "candidate_id": "sha256:773a0efe27817987eb26021673c4de268fd6a75374dd500e9ac50d22a92a4126",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/OAuthController.java",
+      "location": {
+        "start": {
+          "row": 15,
+          "column": 5
+        },
+        "end": {
+          "row": 18,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.OAuthController",
+        "name": "authorize"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RequestParam",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.TokenResponse"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.OAuthController"
+      },
+      "resolved": {
+        "sha256:331a192c73285c7baff6c21b9ba2cb611a66ac5121ba2598d573fd9edb5b4a0d": {
+          "operation_id": "sha256:331a192c73285c7baff6c21b9ba2cb611a66ac5121ba2598d573fd9edb5b4a0d",
+          "http_method": "GET",
+          "path": {
+            "template": "/oauth2/authorize",
+            "normalized": "/oauth2/authorize"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:343fe782cc1c3c4266de609bd935ff1600fe141fd9a58ad2c311e52a94d04930",
+              "name": "response_type",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:c8b0860d3ab63587680967754071019324d28835bbd1b147cb74c822b27b46bf",
+              "name": "client_id",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:1bd8f41f5554cb93067f2e60c3768ac09e00aa2e48b34e35c87189672b77f02e",
+              "name": "redirect_uri",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:8a8427a97fc66a1eb11b36791a9d06aa31af40f4535468a08f392b4b6c062c77",
+              "name": "state",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:d27f3eda4ac8740b58a83073307493cf551f341e0be1b4654086f491eb1784f6",
+              "name": "code_challenge",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:6ce999cc6a09218accf32b6d399b60e30c7b9088efeb89e89a6876d5d81b9375",
+              "name": "nonce",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            }
+          ]
+        }
+      }
+    },
+    "sha256:7945ce00d3d1ecebbc862585cc1ea745efd878470ef210847c895321c52abe26": {
+      "candidate_id": "sha256:7945ce00d3d1ecebbc862585cc1ea745efd878470ef210847c895321c52abe26",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/OAuthController.java",
+      "location": {
+        "start": {
+          "row": 20,
+          "column": 5
+        },
+        "end": {
+          "row": 23,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.OAuthController",
+        "name": "token"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RequestParam",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.TokenResponse"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.OAuthController"
+      },
+      "resolved": {
+        "sha256:bd9c835d2023018abcab3a3b983cf106aed9be2a025d4ed3e3c9d3ddf443e86e": {
+          "operation_id": "sha256:bd9c835d2023018abcab3a3b983cf106aed9be2a025d4ed3e3c9d3ddf443e86e",
+          "http_method": "POST",
+          "path": {
+            "template": "/oauth2/token",
+            "normalized": "/oauth2/token"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:9aa4adeafcfe8980485aec5b7860aaa1cfe4bb2e29800c962cd3a415212c356f",
+              "name": "grant_type",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:d10d4857f68a5ce9f0721cd83feaa095faa4a2ba355aa7ae1385785850c7ccf9",
+              "name": "code",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:25d5f5451beca4734222ad821d00a9be436a422580e05a5b8cd5d59d78e58b1e",
+              "name": "redirect_uri",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:188d11e9915a97d0d0f9d651e050799c7fb357194a68e07e8c7546c422302720",
+              "name": "client_id",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:36d96a074efe8873c5e7ab582b97f38391d4a5ecace4ebd767aae2e3e0834dc6",
+              "name": "client_secret",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:f2e74e46260a97ab19bd4232dca33d0bb4cb0150ed1a74662d1f272b196c31d0",
+              "name": "code_verifier",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:e04f1eb8784b9b06ee2b72a86ee4b8600b7a3ea4a9a923b0f5025cd9fc3b56f0",
+              "name": "refresh_token",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            }
+          ]
+        }
+      }
+    },
+    "sha256:493820b2ef0a06bd5c2663ba8f1df646633412e85280697ed66cb64c399967d9": {
+      "candidate_id": "sha256:493820b2ef0a06bd5c2663ba8f1df646633412e85280697ed66cb64c399967d9",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/UserAdminController.java",
+      "location": {
+        "start": {
+          "row": 20,
+          "column": 5
+        },
+        "end": {
+          "row": 23,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.UserAdminController",
+        "name": "listUsers"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.Authentication",
+          "org.springframework.web.bind.annotation.DeleteMapping",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PathVariable",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RequestParam",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.UserAdminController"
+      },
+      "resolved": {
+        "sha256:1d91b9d5ad839ad830c16f23a56f45c5dae58e7b4abb48b2c773411d3455f3de": {
+          "operation_id": "sha256:1d91b9d5ad839ad830c16f23a56f45c5dae58e7b4abb48b2c773411d3455f3de",
+          "http_method": "GET",
+          "path": {
+            "template": "/admin/users",
+            "normalized": "/admin/users"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:f90bbc97472190c3025c7fb7f78242e44ba9aed6e367c2e6e5313b13783d1e21",
+              "name": "email",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            },
+            {
+              "parameter_id": "sha256:bfa43468d5deaafe70211b666c90c877a0a4c627bd134295e632a1bfc8d656b6",
+              "name": "page",
+              "in": "query",
+              "value_type": {
+                "kind": "primitive",
+                "title": "integer"
+              },
+              "required": false
+            }
+          ]
+        }
+      }
+    },
+    "sha256:8c0a614a21e1d9385e93937ca45eae898b7c8b2f46b68ba67a8491271c6a57ca": {
+      "candidate_id": "sha256:8c0a614a21e1d9385e93937ca45eae898b7c8b2f46b68ba67a8491271c6a57ca",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/UserAdminController.java",
+      "location": {
+        "start": {
+          "row": 25,
+          "column": 5
+        },
+        "end": {
+          "row": 28,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.UserAdminController",
+        "name": "getUser"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.Authentication",
+          "org.springframework.web.bind.annotation.DeleteMapping",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PathVariable",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RequestParam",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.UserAdminController"
+      },
+      "resolved": {
+        "sha256:ccfa09006e5fb077cd415803211e2ec8869d7e2a849f44c4b041fad50d2dee6a": {
+          "operation_id": "sha256:ccfa09006e5fb077cd415803211e2ec8869d7e2a849f44c4b041fad50d2dee6a",
+          "http_method": "GET",
+          "path": {
+            "template": "/admin/users/{userId}",
+            "normalized": "/admin/users/{userId}"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:01f3f03979bd0b7996b9b5780f758e67ce3ba71dec20de0b5260023cc43b8776",
+              "name": "userId",
+              "in": "path",
+              "value_type": {
+                "kind": "primitive",
+                "title": "integer"
+              },
+              "required": true
+            }
+          ]
+        }
+      }
+    },
+    "sha256:d1f682943282a6069394155acfbe612596312c9fd8245c50b5b5929074e0dad8": {
+      "candidate_id": "sha256:d1f682943282a6069394155acfbe612596312c9fd8245c50b5b5929074e0dad8",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/UserAdminController.java",
+      "location": {
+        "start": {
+          "row": 30,
+          "column": 5
+        },
+        "end": {
+          "row": 33,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.UserAdminController",
+        "name": "impersonate"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.Authentication",
+          "org.springframework.web.bind.annotation.DeleteMapping",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PathVariable",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RequestParam",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.UserAdminController"
+      },
+      "resolved": {
+        "sha256:234e822c035c609ab2362d4459c387b691a4e93fa0e8dfd2c97b309c251bc73b": {
+          "operation_id": "sha256:234e822c035c609ab2362d4459c387b691a4e93fa0e8dfd2c97b309c251bc73b",
+          "http_method": "POST",
+          "path": {
+            "template": "/admin/users/{userId}/impersonate",
+            "normalized": "/admin/users/{userId}/impersonate"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:6e49e787d6ddbe77e2c2cc0221b7a6ea17bf682105f76066436a302b62262b78",
+              "name": "userId",
+              "in": "path",
+              "value_type": {
+                "kind": "primitive",
+                "title": "integer"
+              },
+              "required": true
+            }
+          ]
+        }
+      }
+    },
+    "sha256:c6ca16906be3569e5338689e49971ba1554f58a49c6175fe5b6105c6c52969ca": {
+      "candidate_id": "sha256:c6ca16906be3569e5338689e49971ba1554f58a49c6175fe5b6105c6c52969ca",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/UserAdminController.java",
+      "location": {
+        "start": {
+          "row": 35,
+          "column": 5
+        },
+        "end": {
+          "row": 38,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.UserAdminController",
+        "name": "dropSessions"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.security.core.Authentication",
+          "org.springframework.web.bind.annotation.DeleteMapping",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PathVariable",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RequestParam",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.TokenResponse",
+          "ru.testbed.identity.model.User"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.UserAdminController"
+      },
+      "resolved": {
+        "sha256:142a8f42e6ceef607e8c56aef4ccbc872863cfb3216fc46b1fce18338a86f938": {
+          "operation_id": "sha256:142a8f42e6ceef607e8c56aef4ccbc872863cfb3216fc46b1fce18338a86f938",
+          "http_method": "DELETE",
+          "path": {
+            "template": "/admin/users/{userId}/sessions",
+            "normalized": "/admin/users/{userId}/sessions"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:099b19f259af8ec24ca5ba16a3e7b67bf32d0520ffa31b8896e2d0a5909bab0a",
+              "name": "userId",
+              "in": "path",
+              "value_type": {
+                "kind": "primitive",
+                "title": "integer"
+              },
+              "required": true
+            }
+          ]
+        }
+      }
+    },
+    "sha256:322339416367578194e7d8e2ed7958cbb1219eeeb14a26f5666524c382ef9bdc": {
+      "candidate_id": "sha256:322339416367578194e7d8e2ed7958cbb1219eeeb14a26f5666524c382ef9bdc",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/RoleController.java",
+      "location": {
+        "start": {
+          "row": 14,
+          "column": 5
+        },
+        "end": {
+          "row": 17,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.RoleController",
+        "name": "listRoles"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.RoleDto"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.RoleController"
+      },
+      "resolved": {
+        "sha256:45c0000628af44903efaae0a07bb0373b04382c25bb625e6536ce9113a270de8": {
+          "operation_id": "sha256:45c0000628af44903efaae0a07bb0373b04382c25bb625e6536ce9113a270de8",
+          "http_method": "GET",
+          "path": {
+            "template": "/api/v1/roles",
+            "normalized": "/api/v1/roles"
+          },
+          "confidence": "high",
+          "parameters": []
+        }
+      }
+    },
+    "sha256:1aa554a19b381c7fc8301c4c6578cba2cc87d1e3eea9d2311ba5cbe53a32eca0": {
+      "candidate_id": "sha256:1aa554a19b381c7fc8301c4c6578cba2cc87d1e3eea9d2311ba5cbe53a32eca0",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/ApiKeyController.java",
+      "location": {
+        "start": {
+          "row": 19,
+          "column": 5
+        },
+        "end": {
+          "row": 22,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.ApiKeyController",
+        "name": "createApiKey"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.ApiKeyCreateRequest",
+          "ru.testbed.identity.dto.ApiKeyDto"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.ApiKeyController"
+      },
+      "resolved": {
+        "sha256:4cb06c4c0ca038929bc5493ab6f41408c763f3f9579800541d5b45e73c7677a9": {
+          "operation_id": "sha256:4cb06c4c0ca038929bc5493ab6f41408c763f3f9579800541d5b45e73c7677a9",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/api-keys",
+            "normalized": "/api/v1/api-keys"
+          },
+          "confidence": "high",
+          "parameters": [],
+          "request_body": {
+            "request_body_id": "sha256:8ee662fe74106c7a716020d6c88458f38d9602a1d18886f4ae80188d46b8ae01",
+            "mode": "single",
+            "parts": [
+              {
+                "name": "request",
+                "value_type": {
+                  "kind": "object",
+                  "title": "ApiKeyCreateRequest",
+                  "properties": [
+                    {
+                      "name": "name",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "scopes",
+                      "value_type": {
+                        "kind": "array",
+                        "title": "List",
+                        "items": {
+                          "kind": "primitive",
+                          "title": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sha256:a38f85abfacf6c1cea652b48f72938c421fc51d63a00837365c2bf867863c39f": {
+      "candidate_id": "sha256:a38f85abfacf6c1cea652b48f72938c421fc51d63a00837365c2bf867863c39f",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/ApiKeyController.java",
+      "location": {
+        "start": {
+          "row": 24,
+          "column": 5
+        },
+        "end": {
+          "row": 27,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.ApiKeyController",
+        "name": "listApiKeys"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestHeader",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.ApiKeyCreateRequest",
+          "ru.testbed.identity.dto.ApiKeyDto"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.ApiKeyController"
+      },
+      "resolved": {
+        "sha256:cfe4300ac4026f7eeacc43639cddadef7b6efd0119f14b300414422e1be37a9e": {
+          "operation_id": "sha256:cfe4300ac4026f7eeacc43639cddadef7b6efd0119f14b300414422e1be37a9e",
+          "http_method": "GET",
+          "path": {
+            "template": "/api/v1/api-keys",
+            "normalized": "/api/v1/api-keys"
+          },
+          "confidence": "high",
+          "parameters": [
+            {
+              "parameter_id": "sha256:e25f48f7f944a66a0d98c817cc8c03fbcdcfe556d2e5586c66fa0683f8d85fe9",
+              "name": "X-Api-Key",
+              "in": "header",
+              "value_type": {
+                "kind": "primitive",
+                "title": "string"
+              },
+              "required": false
+            }
+          ]
+        }
+      }
+    },
+    "sha256:00a3ab2164544a64a4b8281d496a8e613bebe661a5a6e9826800a8d2aa9103fe": {
+      "candidate_id": "sha256:00a3ab2164544a64a4b8281d496a8e613bebe661a5a6e9826800a8d2aa9103fe",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/MySessionsController.java",
+      "location": {
+        "start": {
+          "row": 14,
+          "column": 5
+        },
+        "end": {
+          "row": 17,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.MySessionsController",
+        "name": "listMySessions"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.List",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.SessionDto"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.MySessionsController"
+      },
+      "resolved": {
+        "sha256:82420dc84a25749f5eda2ccb0da0bda7afda179b62e3ff974104141c2154befb": {
+          "operation_id": "sha256:82420dc84a25749f5eda2ccb0da0bda7afda179b62e3ff974104141c2154befb",
+          "http_method": "GET",
+          "path": {
+            "template": "/api/v1/me/sessions",
+            "normalized": "/api/v1/me/sessions"
+          },
+          "confidence": "high",
+          "parameters": []
+        }
+      }
+    },
+    "sha256:3ae8eac928fdde75fea38568f9727f8bc1013a1ba66ab784d91c334af52555df": {
+      "candidate_id": "sha256:3ae8eac928fdde75fea38568f9727f8bc1013a1ba66ab784d91c334af52555df",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/ConfigController.java",
+      "location": {
+        "start": {
+          "row": 13,
+          "column": 5
+        },
+        "end": {
+          "row": 16,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.ConfigController",
+        "name": "keycloakConfig"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.Map",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.ConfigController"
+      },
+      "resolved": {
+        "sha256:d2c81c82217cf6e14fe1a639b2b00b57835b6323c4eb31923748cca9a828327b": {
+          "operation_id": "sha256:d2c81c82217cf6e14fe1a639b2b00b57835b6323c4eb31923748cca9a828327b",
+          "http_method": "GET",
+          "path": {
+            "template": "/config/keycloak.json",
+            "normalized": "/config/keycloak.json"
+          },
+          "confidence": "high",
+          "parameters": []
+        }
+      }
+    },
+    "sha256:949f037ad1441e125feafe08733c1752f858957268614350e8f181f219a292b6": {
+      "candidate_id": "sha256:949f037ad1441e125feafe08733c1752f858957268614350e8f181f219a292b6",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/ConfigController.java",
+      "location": {
+        "start": {
+          "row": 18,
+          "column": 5
+        },
+        "end": {
+          "row": 21,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.ConfigController",
+        "name": "uiTheme"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.Map",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.ConfigController"
+      },
+      "resolved": {
+        "sha256:b70a516258917e06f5f6e335356f5dc81fa34e8b1aa529ae415f2421d561a084": {
+          "operation_id": "sha256:b70a516258917e06f5f6e335356f5dc81fa34e8b1aa529ae415f2421d561a084",
+          "http_method": "GET",
+          "path": {
+            "template": "/config/ui-theme.json",
+            "normalized": "/config/ui-theme.json"
+          },
+          "confidence": "high",
+          "parameters": []
+        }
+      }
+    },
+    "sha256:7cd51db21a5365335e2298c4036b3ee84fc40fb06fa196005b33dd7c5cb8f15a": {
+      "candidate_id": "sha256:7cd51db21a5365335e2298c4036b3ee84fc40fb06fa196005b33dd7c5cb8f15a",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/OpsController.java",
+      "location": {
+        "start": {
+          "row": 13,
+          "column": 5
+        },
+        "end": {
+          "row": 16,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.OpsController",
+        "name": "env"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "java.util.Map",
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.GetMapping",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.OpsController"
+      },
+      "resolved": {
+        "sha256:389d536401eb6969ddaf2a29ad61b647028f17a1002cb9cec2c0a44e645fd356": {
+          "operation_id": "sha256:389d536401eb6969ddaf2a29ad61b647028f17a1002cb9cec2c0a44e645fd356",
+          "http_method": "GET",
+          "path": {
+            "template": "/actuator/env",
+            "normalized": "/actuator/env"
+          },
+          "confidence": "high",
+          "parameters": []
+        }
+      }
+    },
+    "sha256:6956ff1b2715d9ec1530df6d61880882baa752723cd2243a65f9998f48309730": {
+      "candidate_id": "sha256:6956ff1b2715d9ec1530df6d61880882baa752723cd2243a65f9998f48309730",
+      "candidate_stage": "L1",
+      "language": "java",
+      "framework": "spring",
+      "kind": "spring.mvc.annotation_method",
+      "file_path": "src/main/java/ru/testbed/identity/controller/TokenizerController.java",
+      "location": {
+        "start": {
+          "row": 16,
+          "column": 5
+        },
+        "end": {
+          "row": 19,
+          "column": 5
+        }
+      },
+      "handler_hint": {
+        "container": "ru.testbed.identity.controller.TokenizerController",
+        "name": "tokenize"
+      },
+      "context_hint": {
+        "package": "ru.testbed.identity.controller",
+        "imports": [
+          "org.springframework.http.ResponseEntity",
+          "org.springframework.web.bind.annotation.PostMapping",
+          "org.springframework.web.bind.annotation.RequestBody",
+          "org.springframework.web.bind.annotation.RequestMapping",
+          "org.springframework.web.bind.annotation.RestController",
+          "ru.testbed.identity.dto.TokenizeRequest",
+          "ru.testbed.identity.dto.TokenizeResponse"
+        ],
+        "static_imports": [],
+        "enclosing_type_fqn": "ru.testbed.identity.controller.TokenizerController"
+      },
+      "resolved": {
+        "sha256:92555c4bdb06c429d072a8037809b541f2ba4e58d4c3318bd4bd321ff2763bb0": {
+          "operation_id": "sha256:92555c4bdb06c429d072a8037809b541f2ba4e58d4c3318bd4bd321ff2763bb0",
+          "http_method": "POST",
+          "path": {
+            "template": "/api/v1/nlp/tokenize",
+            "normalized": "/api/v1/nlp/tokenize"
+          },
+          "confidence": "high",
+          "parameters": [],
+          "request_body": {
+            "request_body_id": "sha256:42a49c587eef3f578ae767232cad8237bf48369903481b1af1a50639eef2e628",
+            "mode": "single",
+            "parts": [
+              {
+                "name": "request",
+                "value_type": {
+                  "kind": "object",
+                  "title": "TokenizeRequest",
+                  "properties": [
+                    {
+                      "name": "text",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "tokenizer",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "string"
+                      }
+                    },
+                    {
+                      "name": "maxTokens",
+                      "value_type": {
+                        "kind": "primitive",
+                        "title": "integer"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "const_decls": [
+    {
+      "symbol": "JWT_SIGNING_SECRET",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "c2VjcmV0LWtleS1mb3ItdGVzdGJlZC1vbmx5LTAwMDE=",
+      "location": {
+        "start": {
+          "row": 9,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "JWT_SECRET_PROPERTY",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "jwt.secret=Zx81kQ0pLm2NvB7rT4yWs9Ue",
+      "location": {
+        "start": {
+          "row": 10,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "DEMO_ACCESS_TOKEN",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+      "location": {
+        "start": {
+          "row": 11,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "TEST_BEARER",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "Bearer dummy",
+      "location": {
+        "start": {
+          "row": 12,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "SERVICE_BEARER",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "Bearer 9f8e7d6c5b4a39281706f5e4d3c2b1a0",
+      "location": {
+        "start": {
+          "row": 13,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "AWS_ACCESS_KEY_ID",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "AKIAIOSFODNN7EXAMPLE",
+      "location": {
+        "start": {
+          "row": 14,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "GITHUB_TOKEN",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "ghp_TESTBEDfakeTokenNotReal0000000000000000",
+      "location": {
+        "start": {
+          "row": 15,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "SLACK_BOT_TOKEN",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "xoxb-000000000000-testbedFAKEtoken",
+      "location": {
+        "start": {
+          "row": 16,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "MAPS_API_KEY",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "AIzaTESTBEDfakeKeyNotReal00000000000000",
+      "location": {
+        "start": {
+          "row": 17,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "PRIVATE_KEY_PEM",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAtestbedFAKEkeyMaterialNotReal\n-----END RSA PRIVATE KEY-----",
+      "location": {
+        "start": {
+          "row": 18,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "PUBLIC_KEY_PEM",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AtestbedFAKE\n-----END PUBLIC KEY-----",
+      "location": {
+        "start": {
+          "row": 19,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "PASSWORD_MASK",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "password=***",
+      "location": {
+        "start": {
+          "row": 20,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "TOKEN_NULL",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "token = null",
+      "location": {
+        "start": {
+          "row": 21,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "ADMIN_DEFAULT_PASSWORD",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "admin123",
+      "location": {
+        "start": {
+          "row": 22,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "LDAP_URL",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "ldap://cn=svc,dc=corp:password=Qw3rTy!Secr3tPass99@ldap.corp.example",
+      "location": {
+        "start": {
+          "row": 23,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "OAUTH_CLIENT_SECRET",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "client_secret: 'a7F3k9Q2m8X1p5Z6r4T0w2Y9'",
+      "location": {
+        "start": {
+          "row": 24,
+          "column": 5
+        }
+      }
+    },
+    {
+      "symbol": "REALM_URL",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "expression": "https://sso.corp.example/realms/testbed",
+      "location": {
+        "start": {
+          "row": 25,
+          "column": 5
+        }
+      }
+    }
+  ]
+}

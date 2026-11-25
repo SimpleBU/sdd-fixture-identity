@@ -1,0 +1,2825 @@
+{
+  "app": "identity",
+  "title": "SDD testbed — сервис аутентификации",
+  "fields": [
+    {
+      "id": "identity:POST /api/v1/auth/login:request:username",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "request_body",
+      "name": "username",
+      "rel_path": "username",
+      "json_path_rc": "$.credentials.username",
+      "label_ref": "dto:LoginRequest.username",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [
+        "AUTH"
+      ],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:request:password",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "request_body",
+      "name": "password",
+      "rel_path": "password",
+      "json_path_rc": "$.credentials.password",
+      "label_ref": "dto:LoginRequest.password",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:request:otp",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "request_body",
+      "name": "otp",
+      "rel_path": "otp",
+      "json_path_rc": "$.credentials.otp",
+      "label_ref": "dto:LoginRequest.otp",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:request:captchaToken",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "request_body",
+      "name": "captchaToken",
+      "rel_path": "captchaToken",
+      "json_path_rc": "$.credentials.captchaToken",
+      "label_ref": "dto:LoginRequest.captchaToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": "токен капчи: короткоживущий, спорно"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:request:rememberMe",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "request_body",
+      "name": "rememberMe",
+      "rel_path": "rememberMe",
+      "json_path_rc": "$.credentials.rememberMe",
+      "label_ref": "dto:LoginRequest.rememberMe",
+      "type": "Boolean",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:response:accessToken",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "response_body",
+      "name": "accessToken",
+      "rel_path": "accessToken",
+      "label_ref": "dto:TokenResponse.accessToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:response:refreshToken",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "response_body",
+      "name": "refreshToken",
+      "rel_path": "refreshToken",
+      "label_ref": "dto:TokenResponse.refreshToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:response:idToken",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "response_body",
+      "name": "idToken",
+      "rel_path": "idToken",
+      "label_ref": "dto:TokenResponse.idToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:response:tokenType",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "response_body",
+      "name": "tokenType",
+      "rel_path": "tokenType",
+      "label_ref": "dto:TokenResponse.tokenType",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "Bearer — тип, а не токен"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:response:expiresIn",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "response_body",
+      "name": "expiresIn",
+      "rel_path": "expiresIn",
+      "label_ref": "dto:TokenResponse.expiresIn",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/login:response:scope",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "location": "response_body",
+      "name": "scope",
+      "rel_path": "scope",
+      "label_ref": "dto:TokenResponse.scope",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:request:email",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "request_body",
+      "name": "email",
+      "rel_path": "email",
+      "json_path_rc": "$.request.email",
+      "label_ref": "dto:RegisterRequest.email",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:request:password",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "request_body",
+      "name": "password",
+      "rel_path": "password",
+      "json_path_rc": "$.request.password",
+      "label_ref": "dto:RegisterRequest.password",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:request:passwordConfirm",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "request_body",
+      "name": "passwordConfirm",
+      "rel_path": "passwordConfirm",
+      "json_path_rc": "$.request.passwordConfirm",
+      "label_ref": "dto:RegisterRequest.passwordConfirm",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "password_confirm"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:request:phone",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "request_body",
+      "name": "phone",
+      "rel_path": "phone",
+      "json_path_rc": "$.request.phone",
+      "label_ref": "dto:RegisterRequest.phone",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:request:inviteCode",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "request_body",
+      "name": "inviteCode",
+      "rel_path": "inviteCode",
+      "json_path_rc": "$.request.inviteCode",
+      "label_ref": "dto:RegisterRequest.inviteCode",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:request:acceptTerms",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "request_body",
+      "name": "acceptTerms",
+      "rel_path": "acceptTerms",
+      "json_path_rc": "$.request.acceptTerms",
+      "label_ref": "dto:RegisterRequest.acceptTerms",
+      "type": "Boolean",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:id",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "id",
+      "rel_path": "id",
+      "label_ref": "dto:User.id",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:username",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "username",
+      "rel_path": "username",
+      "label_ref": "dto:User.username",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [
+        "AUTH"
+      ],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:email",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "email",
+      "rel_path": "email",
+      "label_ref": "dto:User.email",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:displayName",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "displayName",
+      "rel_path": "displayName",
+      "label_ref": "dto:User.displayName",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:roles",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "roles",
+      "rel_path": "roles",
+      "label_ref": "dto:User.roles",
+      "type": "List<String>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:passwordHash",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "passwordHash",
+      "rel_path": "passwordHash",
+      "label_ref": "dto:User.passwordHash",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "хэш пароля в ответе — уязвимость; password_hash не совпадает с шаблоном"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:mfaSecret",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "mfaSecret",
+      "rel_path": "mfaSecret",
+      "label_ref": "dto:User.mfaSecret",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "TOTP-секрет"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:lastLoginIp",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "lastLoginIp",
+      "rel_path": "lastLoginIp",
+      "label_ref": "dto:User.lastLoginIp",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "hard",
+      "why": "last_login_ip"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:lastLoginAt",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "lastLoginAt",
+      "rel_path": "lastLoginAt",
+      "label_ref": "dto:User.lastLoginAt",
+      "type": "Instant",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register:response:locked",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "location": "response_body",
+      "name": "locked",
+      "rel_path": "locked",
+      "label_ref": "dto:User.locked",
+      "type": "Boolean",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh:param:Authorization",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "location": "param",
+      "in": "header",
+      "name": "Authorization",
+      "rel_path": "Authorization",
+      "label_ref": "param:POST /api/v1/auth/refresh:Authorization",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh:response:accessToken",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "location": "response_body",
+      "name": "accessToken",
+      "rel_path": "accessToken",
+      "label_ref": "dto:TokenResponse.accessToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh:response:refreshToken",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "location": "response_body",
+      "name": "refreshToken",
+      "rel_path": "refreshToken",
+      "label_ref": "dto:TokenResponse.refreshToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh:response:idToken",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "location": "response_body",
+      "name": "idToken",
+      "rel_path": "idToken",
+      "label_ref": "dto:TokenResponse.idToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh:response:tokenType",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "location": "response_body",
+      "name": "tokenType",
+      "rel_path": "tokenType",
+      "label_ref": "dto:TokenResponse.tokenType",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "Bearer — тип, а не токен"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh:response:expiresIn",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "location": "response_body",
+      "name": "expiresIn",
+      "rel_path": "expiresIn",
+      "label_ref": "dto:TokenResponse.expiresIn",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh:response:scope",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "location": "response_body",
+      "name": "scope",
+      "rel_path": "scope",
+      "label_ref": "dto:TokenResponse.scope",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/password/reset:request:resetToken",
+      "method": "POST",
+      "path": "/api/v1/auth/password/reset",
+      "location": "request_body",
+      "name": "resetToken",
+      "rel_path": "resetToken",
+      "json_path_rc": "$.request.resetToken",
+      "label_ref": "dto:PasswordResetRequest.resetToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/password/reset:request:newPassword",
+      "method": "POST",
+      "path": "/api/v1/auth/password/reset",
+      "location": "request_body",
+      "name": "newPassword",
+      "rel_path": "newPassword",
+      "json_path_rc": "$.request.newPassword",
+      "label_ref": "dto:PasswordResetRequest.newPassword",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "new_password — правило ждёт ровно password"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:request:mfaCode",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "request_body",
+      "name": "mfaCode",
+      "rel_path": "mfaCode",
+      "json_path_rc": "$.request.mfaCode",
+      "label_ref": "dto:MfaVerifyRequest.mfaCode",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:request:deviceId",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "request_body",
+      "name": "deviceId",
+      "rel_path": "deviceId",
+      "json_path_rc": "$.request.deviceId",
+      "label_ref": "dto:MfaVerifyRequest.deviceId",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:request:trustDevice",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "request_body",
+      "name": "trustDevice",
+      "rel_path": "trustDevice",
+      "json_path_rc": "$.request.trustDevice",
+      "label_ref": "dto:MfaVerifyRequest.trustDevice",
+      "type": "Boolean",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:response:accessToken",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "response_body",
+      "name": "accessToken",
+      "rel_path": "accessToken",
+      "label_ref": "dto:TokenResponse.accessToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:response:refreshToken",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "response_body",
+      "name": "refreshToken",
+      "rel_path": "refreshToken",
+      "label_ref": "dto:TokenResponse.refreshToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:response:idToken",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "response_body",
+      "name": "idToken",
+      "rel_path": "idToken",
+      "label_ref": "dto:TokenResponse.idToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:response:tokenType",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "response_body",
+      "name": "tokenType",
+      "rel_path": "tokenType",
+      "label_ref": "dto:TokenResponse.tokenType",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "Bearer — тип, а не токен"
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:response:expiresIn",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "response_body",
+      "name": "expiresIn",
+      "rel_path": "expiresIn",
+      "label_ref": "dto:TokenResponse.expiresIn",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify:response:scope",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "location": "response_body",
+      "name": "scope",
+      "rel_path": "scope",
+      "label_ref": "dto:TokenResponse.scope",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/logout:param:Authorization",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "location": "param",
+      "in": "header",
+      "name": "Authorization",
+      "rel_path": "Authorization",
+      "label_ref": "param:POST /api/v1/auth/logout:Authorization",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/logout:param:Cookie",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "location": "param",
+      "in": "header",
+      "name": "Cookie",
+      "rel_path": "Cookie",
+      "label_ref": "param:POST /api/v1/auth/logout:Cookie",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /oauth2/authorize:param:response_type",
+      "method": "GET",
+      "path": "/oauth2/authorize",
+      "location": "param",
+      "in": "query",
+      "name": "response_type",
+      "rel_path": "response_type",
+      "label_ref": "param:GET /oauth2/authorize:response_type",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /oauth2/authorize:param:client_id",
+      "method": "GET",
+      "path": "/oauth2/authorize",
+      "location": "param",
+      "in": "query",
+      "name": "client_id",
+      "rel_path": "client_id",
+      "label_ref": "param:GET /oauth2/authorize:client_id",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /oauth2/authorize:param:redirect_uri",
+      "method": "GET",
+      "path": "/oauth2/authorize",
+      "location": "param",
+      "in": "query",
+      "name": "redirect_uri",
+      "rel_path": "redirect_uri",
+      "label_ref": "param:GET /oauth2/authorize:redirect_uri",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": "не секрет, но правило OAuth его ловит"
+    },
+    {
+      "id": "identity:GET /oauth2/authorize:param:state",
+      "method": "GET",
+      "path": "/oauth2/authorize",
+      "location": "param",
+      "in": "query",
+      "name": "state",
+      "rel_path": "state",
+      "label_ref": "param:GET /oauth2/authorize:state",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /oauth2/authorize:param:code_challenge",
+      "method": "GET",
+      "path": "/oauth2/authorize",
+      "location": "param",
+      "in": "query",
+      "name": "code_challenge",
+      "rel_path": "code_challenge",
+      "label_ref": "param:GET /oauth2/authorize:code_challenge",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /oauth2/authorize:param:nonce",
+      "method": "GET",
+      "path": "/oauth2/authorize",
+      "location": "param",
+      "in": "query",
+      "name": "nonce",
+      "rel_path": "nonce",
+      "label_ref": "param:GET /oauth2/authorize:nonce",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:param:grant_type",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "param",
+      "in": "query",
+      "name": "grant_type",
+      "rel_path": "grant_type",
+      "label_ref": "param:POST /oauth2/token:grant_type",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": "тип гранта: не секрет"
+    },
+    {
+      "id": "identity:POST /oauth2/token:param:code",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "param",
+      "in": "query",
+      "name": "code",
+      "rel_path": "code",
+      "label_ref": "param:POST /oauth2/token:code",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "authorization code; имя code само ничего не говорит"
+    },
+    {
+      "id": "identity:POST /oauth2/token:param:redirect_uri",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "param",
+      "in": "query",
+      "name": "redirect_uri",
+      "rel_path": "redirect_uri",
+      "label_ref": "param:POST /oauth2/token:redirect_uri",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:param:client_id",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "param",
+      "in": "query",
+      "name": "client_id",
+      "rel_path": "client_id",
+      "label_ref": "param:POST /oauth2/token:client_id",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:param:client_secret",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "param",
+      "in": "query",
+      "name": "client_secret",
+      "rel_path": "client_secret",
+      "label_ref": "param:POST /oauth2/token:client_secret",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:param:code_verifier",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "param",
+      "in": "query",
+      "name": "code_verifier",
+      "rel_path": "code_verifier",
+      "label_ref": "param:POST /oauth2/token:code_verifier",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:param:refresh_token",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "param",
+      "in": "query",
+      "name": "refresh_token",
+      "rel_path": "refresh_token",
+      "label_ref": "param:POST /oauth2/token:refresh_token",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:response:accessToken",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "response_body",
+      "name": "accessToken",
+      "rel_path": "accessToken",
+      "label_ref": "dto:TokenResponse.accessToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:response:refreshToken",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "response_body",
+      "name": "refreshToken",
+      "rel_path": "refreshToken",
+      "label_ref": "dto:TokenResponse.refreshToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:response:idToken",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "response_body",
+      "name": "idToken",
+      "rel_path": "idToken",
+      "label_ref": "dto:TokenResponse.idToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:response:tokenType",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "response_body",
+      "name": "tokenType",
+      "rel_path": "tokenType",
+      "label_ref": "dto:TokenResponse.tokenType",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "Bearer — тип, а не токен"
+    },
+    {
+      "id": "identity:POST /oauth2/token:response:expiresIn",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "response_body",
+      "name": "expiresIn",
+      "rel_path": "expiresIn",
+      "label_ref": "dto:TokenResponse.expiresIn",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token:response:scope",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "location": "response_body",
+      "name": "scope",
+      "rel_path": "scope",
+      "label_ref": "dto:TokenResponse.scope",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:param:email",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "param",
+      "in": "query",
+      "name": "email",
+      "rel_path": "email",
+      "label_ref": "param:GET /admin/users:email",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:param:page",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "param",
+      "in": "query",
+      "name": "page",
+      "rel_path": "page",
+      "label_ref": "param:GET /admin/users:page",
+      "type": "Integer",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:response:id",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "id",
+      "rel_path": "id",
+      "label_ref": "dto:User.id",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:response:username",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "username",
+      "rel_path": "username",
+      "label_ref": "dto:User.username",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [
+        "AUTH"
+      ],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:response:email",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "email",
+      "rel_path": "email",
+      "label_ref": "dto:User.email",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:response:displayName",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "displayName",
+      "rel_path": "displayName",
+      "label_ref": "dto:User.displayName",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:response:roles",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "roles",
+      "rel_path": "roles",
+      "label_ref": "dto:User.roles",
+      "type": "List<String>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:response:passwordHash",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "passwordHash",
+      "rel_path": "passwordHash",
+      "label_ref": "dto:User.passwordHash",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "хэш пароля в ответе — уязвимость; password_hash не совпадает с шаблоном"
+    },
+    {
+      "id": "identity:GET /admin/users:response:mfaSecret",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "mfaSecret",
+      "rel_path": "mfaSecret",
+      "label_ref": "dto:User.mfaSecret",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "TOTP-секрет"
+    },
+    {
+      "id": "identity:GET /admin/users:response:lastLoginIp",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "lastLoginIp",
+      "rel_path": "lastLoginIp",
+      "label_ref": "dto:User.lastLoginIp",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "hard",
+      "why": "last_login_ip"
+    },
+    {
+      "id": "identity:GET /admin/users:response:lastLoginAt",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "lastLoginAt",
+      "rel_path": "lastLoginAt",
+      "label_ref": "dto:User.lastLoginAt",
+      "type": "Instant",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users:response:locked",
+      "method": "GET",
+      "path": "/admin/users",
+      "location": "response_body",
+      "name": "locked",
+      "rel_path": "locked",
+      "label_ref": "dto:User.locked",
+      "type": "Boolean",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:param:userId",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "param",
+      "in": "path",
+      "name": "userId",
+      "rel_path": "userId",
+      "label_ref": "param:GET /admin/users/{userId}:userId",
+      "type": "Long",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:id",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "id",
+      "rel_path": "id",
+      "label_ref": "dto:User.id",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:username",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "username",
+      "rel_path": "username",
+      "label_ref": "dto:User.username",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [
+        "AUTH"
+      ],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:email",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "email",
+      "rel_path": "email",
+      "label_ref": "dto:User.email",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:displayName",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "displayName",
+      "rel_path": "displayName",
+      "label_ref": "dto:User.displayName",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_DIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:roles",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "roles",
+      "rel_path": "roles",
+      "label_ref": "dto:User.roles",
+      "type": "List<String>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:passwordHash",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "passwordHash",
+      "rel_path": "passwordHash",
+      "label_ref": "dto:User.passwordHash",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "хэш пароля в ответе — уязвимость; password_hash не совпадает с шаблоном"
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:mfaSecret",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "mfaSecret",
+      "rel_path": "mfaSecret",
+      "label_ref": "dto:User.mfaSecret",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "TOTP-секрет"
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:lastLoginIp",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "lastLoginIp",
+      "rel_path": "lastLoginIp",
+      "label_ref": "dto:User.lastLoginIp",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "hard",
+      "why": "last_login_ip"
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:lastLoginAt",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "lastLoginAt",
+      "rel_path": "lastLoginAt",
+      "label_ref": "dto:User.lastLoginAt",
+      "type": "Instant",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}:response:locked",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "location": "response_body",
+      "name": "locked",
+      "rel_path": "locked",
+      "label_ref": "dto:User.locked",
+      "type": "Boolean",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate:param:userId",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "location": "param",
+      "in": "path",
+      "name": "userId",
+      "rel_path": "userId",
+      "label_ref": "param:POST /admin/users/{userId}/impersonate:userId",
+      "type": "Long",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate:response:accessToken",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "location": "response_body",
+      "name": "accessToken",
+      "rel_path": "accessToken",
+      "label_ref": "dto:TokenResponse.accessToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate:response:refreshToken",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "location": "response_body",
+      "name": "refreshToken",
+      "rel_path": "refreshToken",
+      "label_ref": "dto:TokenResponse.refreshToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate:response:idToken",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "location": "response_body",
+      "name": "idToken",
+      "rel_path": "idToken",
+      "label_ref": "dto:TokenResponse.idToken",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate:response:tokenType",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "location": "response_body",
+      "name": "tokenType",
+      "rel_path": "tokenType",
+      "label_ref": "dto:TokenResponse.tokenType",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "Bearer — тип, а не токен"
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate:response:expiresIn",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "location": "response_body",
+      "name": "expiresIn",
+      "rel_path": "expiresIn",
+      "label_ref": "dto:TokenResponse.expiresIn",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate:response:scope",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "location": "response_body",
+      "name": "scope",
+      "rel_path": "scope",
+      "label_ref": "dto:TokenResponse.scope",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:DELETE /admin/users/{userId}/sessions:param:userId",
+      "method": "DELETE",
+      "path": "/admin/users/{userId}/sessions",
+      "location": "param",
+      "in": "path",
+      "name": "userId",
+      "rel_path": "userId",
+      "label_ref": "param:DELETE /admin/users/{userId}/sessions:userId",
+      "type": "Long",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/roles:response:name",
+      "method": "GET",
+      "path": "/api/v1/roles",
+      "location": "response_body",
+      "name": "name",
+      "rel_path": "name",
+      "label_ref": "dto:RoleDto.name",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/roles:response:permissions",
+      "method": "GET",
+      "path": "/api/v1/roles",
+      "location": "response_body",
+      "name": "permissions",
+      "rel_path": "permissions",
+      "label_ref": "dto:RoleDto.permissions",
+      "type": "List<String>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:request:name",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "request_body",
+      "name": "name",
+      "rel_path": "name",
+      "json_path_rc": "$.request.name",
+      "label_ref": "dto:ApiKeyCreateRequest.name",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:request:scopes",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "request_body",
+      "name": "scopes",
+      "rel_path": "scopes",
+      "json_path_rc": "$.request.scopes",
+      "label_ref": "dto:ApiKeyCreateRequest.scopes",
+      "type": "List<String>",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:response:id",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "id",
+      "rel_path": "id",
+      "label_ref": "dto:ApiKeyDto.id",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:response:name",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "name",
+      "rel_path": "name",
+      "label_ref": "dto:ApiKeyDto.name",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:response:apiKey",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "apiKey",
+      "rel_path": "apiKey",
+      "label_ref": "dto:ApiKeyDto.apiKey",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:response:prefix",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "prefix",
+      "rel_path": "prefix",
+      "label_ref": "dto:ApiKeyDto.prefix",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:response:createdBy",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "createdBy",
+      "rel_path": "createdBy",
+      "label_ref": "dto:ApiKeyDto.createdBy",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys:response:expiresAt",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "expiresAt",
+      "rel_path": "expiresAt",
+      "label_ref": "dto:ApiKeyDto.expiresAt",
+      "type": "Instant",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys:param:X-Api-Key",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "location": "param",
+      "in": "header",
+      "name": "X-Api-Key",
+      "rel_path": "X-Api-Key",
+      "label_ref": "param:GET /api/v1/api-keys:X-Api-Key",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys:response:id",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "id",
+      "rel_path": "id",
+      "label_ref": "dto:ApiKeyDto.id",
+      "type": "Long",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys:response:name",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "name",
+      "rel_path": "name",
+      "label_ref": "dto:ApiKeyDto.name",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys:response:apiKey",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "apiKey",
+      "rel_path": "apiKey",
+      "label_ref": "dto:ApiKeyDto.apiKey",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys:response:prefix",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "prefix",
+      "rel_path": "prefix",
+      "label_ref": "dto:ApiKeyDto.prefix",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys:response:createdBy",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "createdBy",
+      "rel_path": "createdBy",
+      "label_ref": "dto:ApiKeyDto.createdBy",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys:response:expiresAt",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "location": "response_body",
+      "name": "expiresAt",
+      "rel_path": "expiresAt",
+      "label_ref": "dto:ApiKeyDto.expiresAt",
+      "type": "Instant",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/me/sessions:response:sessionId",
+      "method": "GET",
+      "path": "/api/v1/me/sessions",
+      "location": "response_body",
+      "name": "sessionId",
+      "rel_path": "sessionId",
+      "label_ref": "dto:SessionDto.sessionId",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [
+        "PII_INDIRECT"
+      ],
+      "kind": "positive",
+      "why": "идентификатор сессии = учётные данные"
+    },
+    {
+      "id": "identity:GET /api/v1/me/sessions:response:userAgent",
+      "method": "GET",
+      "path": "/api/v1/me/sessions",
+      "location": "response_body",
+      "name": "userAgent",
+      "rel_path": "userAgent",
+      "label_ref": "dto:SessionDto.userAgent",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/me/sessions:response:ip",
+      "method": "GET",
+      "path": "/api/v1/me/sessions",
+      "location": "response_body",
+      "name": "ip",
+      "rel_path": "ip",
+      "label_ref": "dto:SessionDto.ip",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/me/sessions:response:location",
+      "method": "GET",
+      "path": "/api/v1/me/sessions",
+      "location": "response_body",
+      "name": "location",
+      "rel_path": "location",
+      "label_ref": "dto:SessionDto.location",
+      "type": "String",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "PII_INDIRECT",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/me/sessions:response:createdAt",
+      "method": "GET",
+      "path": "/api/v1/me/sessions",
+      "location": "response_body",
+      "name": "createdAt",
+      "rel_path": "createdAt",
+      "label_ref": "dto:SessionDto.createdAt",
+      "type": "Instant",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    },
+    {
+      "id": "identity:GET /config/keycloak.json:response:$",
+      "method": "GET",
+      "path": "/config/keycloak.json",
+      "location": "response_body",
+      "name": "$",
+      "rel_path": "",
+      "label_ref": "resp:GET /config/keycloak.json",
+      "type": "Map<String, Object>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": "конфиг Keycloak: realm, client secret"
+    },
+    {
+      "id": "identity:GET /config/ui-theme.json:response:$",
+      "method": "GET",
+      "path": "/config/ui-theme.json",
+      "location": "response_body",
+      "name": "$",
+      "rel_path": "",
+      "label_ref": "resp:GET /config/ui-theme.json",
+      "type": "Map<String, Object>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "цвета и шрифты интерфейса"
+    },
+    {
+      "id": "identity:GET /actuator/env:response:$",
+      "method": "GET",
+      "path": "/actuator/env",
+      "location": "response_body",
+      "name": "$",
+      "rel_path": "",
+      "label_ref": "resp:GET /actuator/env",
+      "type": "Map<String, Object>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "переменные окружения с паролями"
+    },
+    {
+      "id": "identity:POST /api/v1/nlp/tokenize:request:text",
+      "method": "POST",
+      "path": "/api/v1/nlp/tokenize",
+      "location": "request_body",
+      "name": "text",
+      "rel_path": "text",
+      "json_path_rc": "$.request.text",
+      "label_ref": "dto:TokenizeRequest.text",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "DYNAMIC",
+      "accept": [],
+      "kind": "positive",
+      "why": "произвольный текст на токенизацию"
+    },
+    {
+      "id": "identity:POST /api/v1/nlp/tokenize:request:tokenizer",
+      "method": "POST",
+      "path": "/api/v1/nlp/tokenize",
+      "location": "request_body",
+      "name": "tokenizer",
+      "rel_path": "tokenizer",
+      "json_path_rc": "$.request.tokenizer",
+      "label_ref": "dto:TokenizeRequest.tokenizer",
+      "type": "String",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "название токенизатора"
+    },
+    {
+      "id": "identity:POST /api/v1/nlp/tokenize:request:maxTokens",
+      "method": "POST",
+      "path": "/api/v1/nlp/tokenize",
+      "location": "request_body",
+      "name": "maxTokens",
+      "rel_path": "maxTokens",
+      "json_path_rc": "$.request.maxTokens",
+      "label_ref": "dto:TokenizeRequest.maxTokens",
+      "type": "Integer",
+      "observable": {
+        "route_candidates": true,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/nlp/tokenize:response:tokens",
+      "method": "POST",
+      "path": "/api/v1/nlp/tokenize",
+      "location": "response_body",
+      "name": "tokens",
+      "rel_path": "tokens",
+      "label_ref": "dto:TokenizeResponse.tokens",
+      "type": "List<String>",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "GRAY",
+      "accept": [],
+      "kind": "gray",
+      "why": "токены текста: повторяют входной текст"
+    },
+    {
+      "id": "identity:POST /api/v1/nlp/tokenize:response:tokenCount",
+      "method": "POST",
+      "path": "/api/v1/nlp/tokenize",
+      "location": "response_body",
+      "name": "tokenCount",
+      "rel_path": "tokenCount",
+      "label_ref": "dto:TokenizeResponse.tokenCount",
+      "type": "Integer",
+      "observable": {
+        "route_candidates": false,
+        "openapi": true
+      },
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": ""
+    }
+  ],
+  "endpoints": [
+    {
+      "id": "identity:POST /api/v1/auth/login",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "handler": "AuthController.login",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/register",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "handler": "AuthController.register",
+      "expect": [
+        "AUTH",
+        "PII_DIRECT"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/refresh",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "handler": "AuthController.refresh",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/password/reset",
+      "method": "POST",
+      "path": "/api/v1/auth/password/reset",
+      "handler": "AuthController.resetPassword",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/mfa/verify",
+      "method": "POST",
+      "path": "/api/v1/auth/mfa/verify",
+      "handler": "AuthController.verifyMfa",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/auth/logout",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "handler": "AuthController.logout",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /oauth2/authorize",
+      "method": "GET",
+      "path": "/oauth2/authorize",
+      "handler": "OAuthController.authorize",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /oauth2/token",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "handler": "OAuthController.token",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users",
+      "method": "GET",
+      "path": "/admin/users",
+      "handler": "UserAdminController.listUsers",
+      "expect": [
+        "AUTH",
+        "PII_DIRECT"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": true,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /admin/users/{userId}",
+      "method": "GET",
+      "path": "/admin/users/{userId}",
+      "handler": "UserAdminController.getUser",
+      "expect": [
+        "AUTH",
+        "PII_DIRECT"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": true,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /admin/users/{userId}/impersonate",
+      "method": "POST",
+      "path": "/admin/users/{userId}/impersonate",
+      "handler": "UserAdminController.impersonate",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [
+        "PII_DIRECT"
+      ],
+      "attrs": {
+        "is_admin_path": true,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:DELETE /admin/users/{userId}/sessions",
+      "method": "DELETE",
+      "path": "/admin/users/{userId}/sessions",
+      "handler": "UserAdminController.dropSessions",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [
+        "PII_DIRECT"
+      ],
+      "attrs": {
+        "is_admin_path": true,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/roles",
+      "method": "GET",
+      "path": "/api/v1/roles",
+      "handler": "RoleController.listRoles",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/api-keys",
+      "method": "POST",
+      "path": "/api/v1/api-keys",
+      "handler": "ApiKeyController.createApiKey",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/api-keys",
+      "method": "GET",
+      "path": "/api/v1/api-keys",
+      "handler": "ApiKeyController.listApiKeys",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /api/v1/me/sessions",
+      "method": "GET",
+      "path": "/api/v1/me/sessions",
+      "handler": "MySessionsController.listMySessions",
+      "expect": [
+        "AUTH",
+        "PII_INDIRECT"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /config/keycloak.json",
+      "method": "GET",
+      "path": "/config/keycloak.json",
+      "handler": "ConfigController.keycloakConfig",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:GET /config/ui-theme.json",
+      "method": "GET",
+      "path": "/config/ui-theme.json",
+      "handler": "ConfigController.uiTheme",
+      "expect": [],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": "ловушка: .json в пути — не значит секреты"
+    },
+    {
+      "id": "identity:GET /actuator/env",
+      "method": "GET",
+      "path": "/actuator/env",
+      "handler": "OpsController.env",
+      "expect": [
+        "AUTH"
+      ],
+      "allow": [],
+      "attrs": {
+        "is_admin_path": true,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    },
+    {
+      "id": "identity:POST /api/v1/nlp/tokenize",
+      "method": "POST",
+      "path": "/api/v1/nlp/tokenize",
+      "handler": "TokenizerController.tokenize",
+      "expect": [],
+      "allow": [
+        "DYNAMIC"
+      ],
+      "attrs": {
+        "is_admin_path": false,
+        "is_bulk_operation": false
+      },
+      "why": ""
+    }
+  ],
+  "constants": [
+    {
+      "id": "identity:const:SecurityConstants.JWT_SIGNING_SECRET",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "JWT_SIGNING_SECRET",
+      "value_preview": "c2VjcmV0LWtleS1mb3ItdGVzdGJlZC1vbmx5LTAw…",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "секрет подписи JWT; в значении нет слова secret — видно только по имени константы"
+    },
+    {
+      "id": "identity:const:SecurityConstants.JWT_SECRET_PROPERTY",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "JWT_SECRET_PROPERTY",
+      "value_preview": "jwt.secret=Zx81kQ0pLm2NvB7rT4yWs9Ue",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:const:SecurityConstants.DEMO_ACCESS_TOKEN",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "DEMO_ACCESS_TOKEN",
+      "value_preview": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ…",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": "пример JWT с jwt.io"
+    },
+    {
+      "id": "identity:const:SecurityConstants.TEST_BEARER",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "TEST_BEARER",
+      "value_preview": "Bearer dummy",
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "заглушка из тестов"
+    },
+    {
+      "id": "identity:const:SecurityConstants.SERVICE_BEARER",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "SERVICE_BEARER",
+      "value_preview": "Bearer 9f8e7d6c5b4a39281706f5e4d3c2b1a0",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:const:SecurityConstants.AWS_ACCESS_KEY_ID",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "AWS_ACCESS_KEY_ID",
+      "value_preview": "AKIAIOSFODNN7EXAMPLE",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": "пример ключа из документации AWS"
+    },
+    {
+      "id": "identity:const:SecurityConstants.GITHUB_TOKEN",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "GITHUB_TOKEN",
+      "value_preview": "ghp_TESTBEDfakeTokenNotReal0000000000000…",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": "формат GitHub PAT, значение вымышленное"
+    },
+    {
+      "id": "identity:const:SecurityConstants.SLACK_BOT_TOKEN",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "SLACK_BOT_TOKEN",
+      "value_preview": "xoxb-000000000000-testbedFAKEtoken",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": "формат Slack, значение вымышленное"
+    },
+    {
+      "id": "identity:const:SecurityConstants.MAPS_API_KEY",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "MAPS_API_KEY",
+      "value_preview": "AIzaTESTBEDfakeKeyNotReal00000000000000",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": "формат Google API key, значение вымышленное"
+    },
+    {
+      "id": "identity:const:SecurityConstants.PRIVATE_KEY_PEM",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "PRIVATE_KEY_PEM",
+      "value_preview": "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIB…",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:const:SecurityConstants.PUBLIC_KEY_PEM",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "PUBLIC_KEY_PEM",
+      "value_preview": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqh…",
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "публичный ключ"
+    },
+    {
+      "id": "identity:const:SecurityConstants.PASSWORD_MASK",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "PASSWORD_MASK",
+      "value_preview": "password=***",
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": "маска в логах"
+    },
+    {
+      "id": "identity:const:SecurityConstants.TOKEN_NULL",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "TOKEN_NULL",
+      "value_preview": "token = null",
+      "expect": "NONE",
+      "accept": [],
+      "kind": "trap",
+      "why": ""
+    },
+    {
+      "id": "identity:const:SecurityConstants.ADMIN_DEFAULT_PASSWORD",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "ADMIN_DEFAULT_PASSWORD",
+      "value_preview": "admin123",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "пароль по умолчанию: короткий, без присвоения"
+    },
+    {
+      "id": "identity:const:SecurityConstants.LDAP_URL",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "LDAP_URL",
+      "value_preview": "ldap://cn=svc,dc=corp:password=Qw3rTy!Se…",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "hard",
+      "why": "пароль со спецсимволом рвёт шаблон secret_assignment"
+    },
+    {
+      "id": "identity:const:SecurityConstants.OAUTH_CLIENT_SECRET",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "OAUTH_CLIENT_SECRET",
+      "value_preview": "client_secret: 'a7F3k9Q2m8X1p5Z6r4T0w2Y9…",
+      "expect": "AUTH",
+      "accept": [],
+      "kind": "positive",
+      "why": ""
+    },
+    {
+      "id": "identity:const:SecurityConstants.REALM_URL",
+      "file_path": "src/main/java/ru/testbed/identity/config/SecurityConstants.java",
+      "symbol": "REALM_URL",
+      "value_preview": "https://sso.corp.example/realms/testbed",
+      "expect": "NONE",
+      "accept": [],
+      "kind": "plain",
+      "why": ""
+    }
+  ]
+}
